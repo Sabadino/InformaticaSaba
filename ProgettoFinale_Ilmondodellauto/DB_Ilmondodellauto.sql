@@ -1,0 +1,18 @@
+-- Active: 1769765509518@@127.0.0.1@3306
+CREATE DATABASE Ilmondodellauto;
+USE Ilmondodellauto;
+
+CREATE TABLE Auto (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    marca VARCHAR(50) NOT NULL,
+    modello VARCHAR(50) NOT NULL,
+    anno INT NOT NULL,
+    prezzo DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE User (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    passwords VARCHAR(255) NOT NULL
+);
