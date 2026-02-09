@@ -1,5 +1,6 @@
 -- Active: 1769765509518@@127.0.0.1@3306
 CREATE DATABASE Ilmondodellauto;
+
 USE Ilmondodellauto;
 
 CREATE TABLE Auto (
