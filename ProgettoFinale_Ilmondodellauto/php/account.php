@@ -3,7 +3,7 @@ session_start();
 header("Content-Type: application/json; charset=utf-8");
 
 $hostname = "localhost";
-$dbname   = "agenda_appuntamenti";
+$dbname   = "Ilmondodellauto";
 $dbuser   = "root";
 $dbpass   = "";
 
