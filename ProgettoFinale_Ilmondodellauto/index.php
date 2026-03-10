@@ -10,7 +10,9 @@
   <body>
     <div class="container">
       <h1>Mondo Dell'Auto</h1>
+      <a href="login.php" class="button">Login</a>
       <button id="logoutButton" onclick="logout()">Logout</button>
+      
     </div>
   </body>
 </html>
