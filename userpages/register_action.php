@@ -10,10 +10,8 @@ $telefono = htmlspecialchars($_POST['telefono']);
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 try {
-    $sql = "INSERT INTO utente (Nome, Cognome, Username, Email, Telefono, Password) 
-            VALUES (:nome, :cognome, :username, :email, :telefono, :password)";
-    $sth = DBHandler::getPDO()->prepare($sql);
-    $sth->execute([
+    $query = DBHandler::getPDO()->prepare("INSERT INTO utente (Nome, Cognome, Username, Email, Telefono, Password) VALUES (:nome, :cognome, :username, :email, :telefono, :password)");
+    $query->execute([
         'nome' => $nome,
         'cognome' => $cognome,
         'username' => $username,
@@ -22,15 +20,12 @@ try {
         'password' => $password
     ]);
 
-    // login automatico dopo registrazione
     $id = DBHandler::getPDO()->lastInsertId();
     $_SESSION['utente_id'] = $id;
     $_SESSION['utente_nome'] = $nome;
     $_SESSION['utente_ruolo'] = 'utente';
 
     header('Location: catalogo.php');
-
-} catch (PDOException $e) {
-    // email o username già in uso
+} catch(PDOException $e){
     header('Location: register.php?errore=1');
 }

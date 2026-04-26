@@ -1,6 +1,6 @@
 <?php
-if (isset($_SESSION['utente_id'])) {
-    header('Location: /ProgettoFinale_Ilmondodellauto/userpages/catalogo.php');
+if(isset($_SESSION['utente_id'])){
+    header('Location: catalogo.php');
     exit;
 }
 ?>
@@ -9,11 +9,11 @@ if (isset($_SESSION['utente_id'])) {
     <div class="auth-card">
 
         <div class="auth-logo">Il Mondo <em>dell'Auto</em></div>
-        <p class="auth-tagline">Crea il tuo account gratuito</p>
+        <p>Crea il tuo account gratuito</p>
 
         <h2>Registrati</h2>
 
-        <?php if (isset($_GET['errore'])): ?>
+        <?php if(isset($_GET['errore'])): ?>
             <div class="alert-errore">Email o username già in uso</div>
         <?php endif; ?>
 
@@ -45,7 +45,7 @@ if (isset($_SESSION['utente_id'])) {
             <button type="submit">Crea account</button>
         </form>
 
-        <p class="auth-link">Hai già un account? <a href="/ProgettoFinale_Ilmondodellauto/userpages/login.php">Accedi</a></p>
+        <p>Hai già un account? <a href="login.php">Accedi</a></p>
 
     </div>
 </div>
