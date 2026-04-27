@@ -20,7 +20,7 @@ if(isset($_SESSION['utente_id'])) {
     <div class="auth-card">
 
         <h4 class="text-center mb-1">Il Mondo <em>dell'Auto</em></h4>
-        <p class="text-center text-muted mb-4">Crea il tuo account gratuito</p>
+        <p class="text-center text-muted mb-4">Crea il tuo account</p>
 
         <h2 class="mb-3">Registrati</h2>
 
