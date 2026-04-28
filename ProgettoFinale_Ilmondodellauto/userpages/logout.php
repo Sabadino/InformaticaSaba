@@ -1,6 +1,6 @@
 <?php
 session_start();
 session_destroy();
-header('Location: /ProgettoFinale_Ilmondodellauto/userpages/login.php');
+header('Location: /InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/login.php');
 exit;
 ?>
