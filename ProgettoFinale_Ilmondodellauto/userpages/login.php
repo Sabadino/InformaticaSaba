@@ -12,7 +12,7 @@ if(isset($_SESSION['utente_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Il Mondo dell'Auto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/ProgettoFinale_Ilmondodellauto/style/auth.css">
+    <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/auth.css">
 </head>
 <body>
 
