@@ -1,8 +1,3 @@
-body {
-    background-color: #F6F3ED;
-    font-family: sans-serif;
-}
-
 .foto-principale {
     width: 100%;
     height: 280px;
@@ -19,9 +14,10 @@ body {
 }
 
 .descrizione {
-    background-color: #eee;
+    background-color: lightgray;
     border-radius: 8px;
     padding: 14px;
+    margin-top: 16px;
 }
 
 .car-marca {
@@ -33,12 +29,14 @@ body {
 .prezzo {
     font-size: 30px;
     font-weight: bold;
+    margin: 10px 0;
 }
 
 .ctas {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin: 16px 0;
 }
 
 .ctas a {
@@ -50,20 +48,22 @@ body {
 }
 
 .btn-prenota { background-color: #1C3829; color: white; }
-.btn-wa { background-color: #16a34a; color: white; }
-.btn-subito { background-color: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
-.btn-tel { background-color: #eee; color: #333; }
+.btn-wa { background-color: green; color: white; }
+.btn-subito { background-color: #fff7ed; color: #c2410c; border: 1px solid orange; }
+.btn-tel { background-color: lightgray; color: black; }
 .btn-wish { background-color: white; color: #1C3829; border: 1px solid #1C3829; }
 
 .badge-acc {
     font-size: 11px;
     padding: 4px 10px;
     border-radius: 20px;
-    background-color: #eee;
+    background-color: lightgray;
     color: gray;
 }
 
 .rec-item {
-    background-color: #eee;
+    background-color: #F6F3ED;
     border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
 }

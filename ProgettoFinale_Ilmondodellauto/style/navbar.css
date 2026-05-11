@@ -1,0 +1,49 @@
+body {
+    background-color: #F6F3ED;
+    font-family: sans-serif;
+    color: black;
+}
+
+.navbar {
+    background-color: #F6F3ED;
+    border-bottom: 1px solid lightgray;
+}
+
+.navbar-brand {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+
+.navbar-brand em {
+    color: #1C3829;
+    font-style: italic;
+}
+
+.nav-link {
+    color: gray;
+    font-size: 13px;
+}
+
+.btn-login {
+    background-color: #1C3829;
+    color: white;
+    padding: 7px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.btn-wish {
+    color: black;
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid lightgray;
+    padding: 7px 13px;
+    border-radius: 6px;
+}
+
+.nav-username {
+    font-size: 13px;
+    color: gray;
+}

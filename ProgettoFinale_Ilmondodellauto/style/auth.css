@@ -1,18 +1,13 @@
-body {
-    background-color: #F6F3ED;
-    font-family: sans-serif;
-}
-
 .auth-wrap {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 60px);
 }
 
 .auth-card {
     background: white;
-    border: 1px solid #ddd;
+    border: 1px solid lightgray;
     border-radius: 12px;
     padding: 36px;
     width: 380px;
@@ -37,7 +32,7 @@ body {
 .fg input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid lightgray;
     border-radius: 6px;
     font-size: 14px;
 }
@@ -59,7 +54,7 @@ body {
 }
 
 .alert-errore {
-    background: #fee2e2;
+    background: pink;
     color: red;
     padding: 10px;
     border-radius: 6px;

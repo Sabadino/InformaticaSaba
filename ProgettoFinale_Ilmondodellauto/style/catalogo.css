@@ -1,8 +1,3 @@
-body {
-    background-color: #F6F3ED;
-    font-family: sans-serif;
-}
-
 .car-marca {
     font-size: 11px;
     color: gray;
@@ -12,7 +7,7 @@ body {
 
 .no-foto {
     height: 160px;
-    background-color: #eee;
+    background-color: lightgray;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,17 +17,21 @@ body {
 .badge-spec {
     font-size: 11px;
     padding: 3px 8px;
-    background-color: #ffffff;
+    background-color: lightgray;
     border-radius: 4px;
     color: gray;
-}
-
-.card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
 }
 
 .card-img-top {
     height: 160px;
     object-fit: cover;
+}
+
+.btn-cerca {
+    background-color: #1C3829;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
 }
