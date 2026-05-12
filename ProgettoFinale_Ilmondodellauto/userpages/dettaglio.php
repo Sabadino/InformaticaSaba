@@ -80,14 +80,14 @@ $recensioni = $queryRec->fetchAll(PDO::FETCH_ASSOC);
             <div class="ctas mt-3">
                 <?php
                 if(isset($_SESSION['utente_id'])) {
-                    echo "<a href='prenotazione.php?id=" . $macchina['ID'] . "' class='btn-prenota'>📅 Prenota test drive</a>";
+                    echo "<a href='prenotazione.php?id=" . $macchina['ID'] . "' class='btn-prenota'> Prenota test drive</a>";
                 } else {
                     echo "<a href='login.php' class='btn-prenota'>📅 Prenota test drive</a>";
                 }
                 ?>
-                <a href="https://wa.me/393802074281" target="_blank" class="btn-wa">💬 WhatsApp</a>
-                <a href="https://www.subito.it" target="_blank" class="btn-subito">🔗 Vedi su Subito.it</a>
-                <a href="tel:+393802074281" class="btn-tel">📞 Chiama</a>
+                <a href="https://wa.me/393802074281" target="_blank" class="btn-wa">WhatsApp</a>
+                <a href="https://www.subito.it" target="_blank" class="btn-subito">Vedi su Subito.it</a>
+                <a href="tel:+393802074281" class="btn-tel">Chiama</a>
                 <?php
                 if(isset($_SESSION['utente_id'])) {
                     echo "<a href='wishlist_action.php?id=" . $macchina['ID'] . "&azione=aggiungi' class='btn-wish'>♡ Salva</a>";

@@ -26,7 +26,7 @@ session_start();
 </div>
 
 <div class="img-pausa">
-    <img src="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/bg3.jpg" alt="">
+    <img src="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/bg2.jpg" alt="">
 </div>
 
 <div class="sezione-contatti">
@@ -46,8 +46,8 @@ session_start();
                 <p class="etichetta">Orari</p>
                 <h2>Quando siamo aperti</h2>
                 <table class="orari-table mt-3">
-                    <tr><td>Lun - Ven</td><td>8:30–12:30 / 14:30–19:30</td></tr>
-                    <tr><td>Sabato</td><td>8:30–12:30 / 14:30–17:30</td></tr>
+                    <tr><td>Lun - Ven</td><td>8:30 12:30 / 14:30 19:30</td></tr>
+                    <tr><td>Sabato</td><td>8:30 12:30 / 14:30 17:30</td></tr>
                     <tr><td>Domenica</td><td>Chiuso</td></tr>
                 </table>
             </div>
