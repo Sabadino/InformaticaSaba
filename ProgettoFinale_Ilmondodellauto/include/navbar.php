@@ -31,7 +31,7 @@
 
             <div class="d-flex gap-2 align-items-center">
                 <?php if(isset($_SESSION['utente_id'])): ?>
-                    <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/wishlist.php" class="btn-wish">♡ Wishlist</a>
+                    <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/miePrenotazioni.php" class="btn-wish">Prenotazioni</a>
                     <span class="nav-username"><?= $_SESSION['utente_nome'] ?></span>
                     <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/logout.php" class="btn-login">Esci</a>
                 <?php else: ?>

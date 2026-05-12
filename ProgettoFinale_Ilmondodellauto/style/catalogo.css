@@ -35,3 +35,20 @@
     border-radius: 6px;
     cursor: pointer;
 }
+
+.btn-verde-sm {
+    background-color: #1C3829;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.container {
+    padding-top: 30px;
+}
+
+form.mb-4 {
+    margin-top: 16px;
+}

@@ -5,26 +5,17 @@ if(isset($_SESSION['utente_id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrati - Il Mondo dell'Auto</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/auth.css">
-</head>
-<body>
+<link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/auth.css">
 
 <div class="auth-wrap">
     <div class="auth-card">
 
         <h4 class="text-center mb-1">Il Mondo <em>dell'Auto</em></h4>
-        <p class="text-center text-muted mb-4">Crea il tuo account</p>
+        <p class="text-center text-muted mb-4">Crea il tuo account gratuito</p>
 
         <h2 class="mb-3">Registrati</h2>
 
-        <?php   
+        <?php
         if(isset($_GET['errore'])) {
             echo "<div class='alert-errore'>Email o username già in uso</div>";
         }

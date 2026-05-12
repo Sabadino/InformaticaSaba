@@ -1,0 +1,18 @@
+.prenotazione-card {
+    background: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.stato-badge {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.stato-in-attesa { background: #fff3cd; color: #856404; }
+.stato-confermata { background: #d1fae5; color: #065f46; }
+.stato-annullata { background: #fee2e2; color: #991b1b; }
+.stato-completata { background: #e0e7ff; color: #3730a3; }
