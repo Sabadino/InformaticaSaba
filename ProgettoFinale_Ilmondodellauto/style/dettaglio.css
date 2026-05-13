@@ -1,3 +1,9 @@
+body {
+    background-color: #F6F3ED;
+    font-family: sans-serif;
+}
+
+/* foto principale */
 .foto-principale {
     width: 100%;
     height: 280px;
@@ -13,8 +19,13 @@
     cursor: pointer;
 }
 
+.thumbnail:hover {
+    opacity: 0.8;
+}
+
+/* sezione descrizione */
 .descrizione {
-    background-color: lightgray;
+    background-color: #eee;
     border-radius: 8px;
     padding: 14px;
     margin-top: 16px;
@@ -26,17 +37,20 @@
     text-transform: uppercase;
 }
 
+/* prezzo grande */
 .prezzo {
     font-size: 30px;
     font-weight: bold;
     margin: 10px 0;
 }
 
+/* bottoni contatto */
 .ctas {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin: 16px 0;
+    max-width: 300px;
 }
 
 .ctas a {
@@ -45,25 +59,29 @@
     text-align: center;
     text-decoration: none;
     font-size: 13px;
+    transition: 0.2s;
 }
 
 .btn-prenota { background-color: #1C3829; color: white; }
+.btn-prenota:hover { background-color: #2a6b45; color: white; }
 .btn-wa { background-color: green; color: white; }
+.btn-wa:hover { background-color: #1a7a1a; color: white; }
 .btn-subito { background-color: #fff7ed; color: #c2410c; border: 1px solid orange; }
 .btn-tel { background-color: lightgray; color: black; }
 .btn-wish { background-color: white; color: #1C3829; border: 1px solid #1C3829; }
 
+/* optional */
 .badge-acc {
     font-size: 11px;
     padding: 4px 10px;
     border-radius: 20px;
-    background-color: lightgray;
+    background-color: #eee;
     color: gray;
 }
 
-.rec-item {
-    background-color: #F6F3ED;
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 8px;
+/* tabella specifiche */
+.table-sm td {
+    padding: 8px 0;
+    border-bottom: 1px solid lightgray;
+    font-size: 14px;
 }

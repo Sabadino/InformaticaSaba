@@ -1,12 +1,12 @@
 <?php
-$pdo = DBHandler::getPDO();
-$id_macchina = $_GET['id'];
+$db = DBHandler::getPDO();
+$id = $_GET['id'];
 
-$query = $pdo->prepare("SELECT * FROM macchina WHERE ID = :id");
-$query->execute(['id' => $id_macchina]);
-$macchina = $query->fetch(PDO::FETCH_ASSOC);
+$stmt = $db->prepare("SELECT * FROM macchina WHERE ID = ?");
+$stmt->execute([$id]);
+$macchina = $stmt->fetch();
 
-if(!$macchina) {
+if (!$macchina) {
     header('Location: catalogo.php');
     exit;
 }
@@ -16,19 +16,19 @@ if(!$macchina) {
 
 <div class="container mt-4" style="max-width: 600px">
 
-    <a href="dettaglio.php?id=<?php echo $id_macchina; ?>">← Torna alla scheda</a>
+    <a href="dettaglio.php?id=<?php echo $id; ?>">← Torna alla scheda</a>
 
     <h2 class="mt-3">Prenota un appuntamento</h2>
     <p class="text-muted"><?php echo $macchina['Marca'] . ' ' . $macchina['Modello'] . ' · ' . $macchina['Anno']; ?></p>
 
     <?php
-    if(isset($_GET['errore'])) {
+    if (isset($_GET['errore'])) {
         echo "<div class='alert-errore'>Qualcosa è andato storto, riprova.</div>";
     }
     ?>
 
     <form action="prenotazione_action.php" method="POST" class="mt-4">
-        <input type="hidden" name="id_macchina" value="<?php echo $id_macchina; ?>">
+        <input type="hidden" name="id_macchina" value="<?php echo $id; ?>">
         <div class="fg">
             <label>Tipo di appuntamento</label>
             <select name="tipo">

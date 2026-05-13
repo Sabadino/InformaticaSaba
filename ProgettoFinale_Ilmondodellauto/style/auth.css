@@ -1,3 +1,9 @@
+body {
+    background-color: #F6F3ED;
+    font-family: sans-serif;
+}
+
+/* card centrale login/register */
 .auth-wrap {
     display: flex;
     justify-content: center;
@@ -18,6 +24,7 @@
     font-style: italic;
 }
 
+/* campi form */
 .fg {
     margin-bottom: 14px;
 }
@@ -29,7 +36,7 @@
     margin-bottom: 5px;
 }
 
-.fg input {
+.fg input, .fg select, .fg textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid lightgray;
@@ -37,9 +44,15 @@
     font-size: 14px;
 }
 
+.fg input:focus, .fg select:focus {
+    outline: none;
+    border-color: #1C3829;
+}
+
+/* bottone principale */
 .auth-card button {
     width: 100%;
-    background-color: #1C3829;
+    background-color: #2a6b45;
     color: white;
     border: none;
     border-radius: 8px;
@@ -47,12 +60,18 @@
     font-size: 14px;
     cursor: pointer;
     margin-top: 6px;
+    transition: 0.2s;
+}
+
+.auth-card button:hover {
+    background-color: #1C3829;
 }
 
 .auth-card a {
     color: #1C3829;
 }
 
+/* messaggio errore */
 .alert-errore {
     background: pink;
     color: red;

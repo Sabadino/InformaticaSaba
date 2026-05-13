@@ -2,30 +2,34 @@
 session_start();
 require_once('../include/DBHandler.php');
 
-$nome = htmlspecialchars($_POST['nome']);
-$cognome = htmlspecialchars($_POST['cognome']);
-$username = htmlspecialchars($_POST['username']);
-$email = htmlspecialchars($_POST['email']);
-$telefono = htmlspecialchars($_POST['telefono']);
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$db = DBHandler::getPDO();
+
+$passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+$sql = "INSERT INTO utente (Nome, Cognome, Username, Email, Telefono, Password) VALUES (?, ?, ?, ?, ?, ?)";
 
 try {
-    $query = DBHandler::getPDO()->prepare("INSERT INTO utente (Nome, Cognome, Username, Email, Telefono, Password) VALUES (:nome, :cognome, :username, :email, :telefono, :password)");
-    $query->execute([
-        'nome' => $nome,
-        'cognome' => $cognome,
-        'username' => $username,
-        'email' => $email,
-        'telefono' => $telefono,
-        'password' => $password
+    $stmt = $db->prepare($sql);
+    $stmt->execute([
+        $_POST['nome'],
+        $_POST['cognome'],
+        $_POST['username'],
+        $_POST['email'],
+        $_POST['telefono'],
+        $passwordHash
     ]);
 
-    $id = DBHandler::getPDO()->lastInsertId();
-    $_SESSION['utente_id'] = $id;
-    $_SESSION['utente_nome'] = $nome;
+    $nuovoId = $db->lastInsertId();
+    $_SESSION['utente_id'] = $nuovoId;
+    $_SESSION['utente_nome'] = $_POST['nome'];
     $_SESSION['utente_ruolo'] = 'utente';
 
     header('Location: catalogo.php');
-} catch(PDOException $e){
-    header('Location: register.php?errore=1');
+    exit();
+
+} catch (PDOException $e) {
+    if ($e->getCode() == 23000) {
+        header('Location: register.php?errore=1');
+        exit();
+    }
 }

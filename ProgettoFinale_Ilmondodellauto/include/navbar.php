@@ -1,5 +1,7 @@
 <?php
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -11,34 +13,24 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid px-4">
+<nav class="navbar-sito">
+    <div class="navbar-logo">
+        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/index.php">Il Mondo <em>dell'Auto</em></a>
+    </div>
 
-        <a class="navbar-brand" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/index.php">
-            Il Mondo <em>dell'Auto</em>
-        </a>
+    <div class="navbar-links">
+        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/catalogo.php" class="<?= ($current_page == 'catalogo.php') ? 'attivo' : ''; ?>">Catalogo</a>
+        <a href="#">Chi siamo</a>
+        <a href="#">Contatti</a>
+    </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navMenu">
-            <div class="navbar-nav mx-auto">
-                <a class="nav-link" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/catalogo.php">Catalogo</a>
-                <a class="nav-link" href="#">Chi siamo</a>
-                <a class="nav-link" href="#">Contatti</a>
-            </div>
-
-            <div class="d-flex gap-2 align-items-center">
-                <?php if(isset($_SESSION['utente_id'])): ?>
-                    <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/miePrenotazioni.php" class="btn-wish">Prenotazioni</a>
-                    <span class="nav-username"><?= $_SESSION['utente_nome'] ?></span>
-                    <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/logout.php" class="btn-login">Esci</a>
-                <?php else: ?>
-                    <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/login.php" class="btn-login">Accedi</a>
-                <?php endif; ?>
-            </div>
-        </div>
-
+    <div class="navbar-utente">
+        <?php if (isset($_SESSION['utente_id'])): ?>
+            <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/miePrenotazioni.php" class="<?= ($current_page == 'miePrenotazioni.php') ? 'attivo' : ''; ?>">Prenotazioni</a>
+            <span class="saluto">Ciao, <strong><?php echo $_SESSION['utente_nome']; ?></strong></span>
+            <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/logout.php" class="btn-esci">Esci</a>
+        <?php else: ?>
+            <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/login.php" style="background-color:#1C3829; color:white; padding:7px 16px; border-radius:6px; text-decoration:none; font-size:13px;">Accedi</a>
+        <?php endif; ?>
     </div>
 </nav>

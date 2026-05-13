@@ -1,14 +1,14 @@
 <?php
-$pdo = DBHandler::getPDO();
-$id_utente = $_SESSION['utente_id'];
+$db = DBHandler::getPDO();
 
-$query = $pdo->prepare("SELECT p.*, m.Marca, m.Modello, m.Anno 
+// prendo le prenotazioni dell'utente loggato
+$stmt = $db->prepare("SELECT p.*, m.Marca, m.Modello, m.Anno 
     FROM prenotazione p 
     JOIN macchina m ON p.ID_Macchina = m.ID 
-    WHERE p.ID_Utente = :id 
+    WHERE p.ID_Utente = ? 
     ORDER BY p.DataOraPrenotazione DESC");
-$query->execute(['id' => $id_utente]);
-$prenotazioni = $query->fetchAll(PDO::FETCH_ASSOC);
+$stmt->execute([$_SESSION['utente_id']]);
+$prenotazioni = $stmt->fetchAll();
 ?>
 
 <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/prenotazioni.css">
@@ -19,10 +19,10 @@ $prenotazioni = $query->fetchAll(PDO::FETCH_ASSOC);
     <p class="text-muted mb-4">Storico dei tuoi appuntamenti</p>
 
     <?php
-    if(count($prenotazioni) == 0) {
+    if (count($prenotazioni) == 0) {
         echo "<p>Non hai ancora nessuna prenotazione. <a href='catalogo.php'>Sfoglia il catalogo</a></p>";
     } else {
-        foreach($prenotazioni as $p) {
+        foreach ($prenotazioni as $p) {
             echo "
             <div class='prenotazione-card mb-3'>
                 <div class='d-flex justify-content-between align-items-start'>

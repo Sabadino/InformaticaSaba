@@ -1,0 +1,74 @@
+body {
+    background-color: #F6F3ED;
+    font-family: sans-serif;
+}
+
+/* tabella gestione */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.admin-table th {
+    background-color: #1C3829;
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+}
+
+.admin-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid lightgray;
+}
+
+.admin-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* bottoni azioni */
+.btn-elimina {
+    background-color: red;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.btn-elimina:hover {
+    background-color: darkred;
+}
+
+.btn-salva {
+    background-color: #1C3829;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.2s;
+}
+
+.btn-salva:hover {
+    background-color: #2a6b45;
+}
+
+/* messaggi */
+.alert-successo {
+    background: #d1fae5;
+    color: green;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+}
+
+.alert-errore {
+    background: pink;
+    color: red;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+}

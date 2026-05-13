@@ -1,33 +1,33 @@
 <?php
-// navbar per le pagine admin
+if (session_status() === PHP_SESSION_NONE) session_start();
+$current_page = basename($_SERVER['PHP_SELF']);
+$nomeAdmin = isset($_SESSION['utente_nome']) ? $_SESSION['utente_nome'] : 'Admin';
 ?>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/style.css">
-    <title>Il Mondo dell'Auto — Admin</title>
+    <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/navbar.css">
+    <title>Il Mondo dell'Auto - Admin</title>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg admin-nav">
-    <div class="container-fluid px-4">
+<nav class="navbar-sito navbar-admin">
+    <div class="navbar-logo">
+        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/index.php">Il Mondo <em>dell'Auto</em></a>
+        <span>Area Admin</span>
+    </div>
 
-        <a class="navbar-brand" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/index.php">
-            Il Mondo <em>dell'Auto</em> <span class="admin-badge">ADMIN</span>
-        </a>
+    <div class="navbar-links">
+        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/adminpages/gestioneAuto.php" class="<?= ($current_page == 'gestioneAuto.php') ? 'attivo' : ''; ?>">Gestione Auto</a>
+        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/adminpages/gestionePrenotazioni.php" class="<?= ($current_page == 'gestionePrenotazioni.php') ? 'attivo' : ''; ?>">Prenotazioni</a>
+    </div>
 
-        <div class="navbar-nav mx-auto">
-            <a class="nav-link" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/adminpages/gestioneAuto.php">Gestione Auto</a>
-            <a class="nav-link" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/adminpages/gestionePrenotazioni.php">Prenotazioni</a>
-        </div>
-
-        <div class="d-flex gap-2 align-items-center">
-            <span class="nav-username"><?= $_SESSION['utente_nome'] ?></span>
-            <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/logout.php" class="btn-login">Esci</a>
-        </div>
-
+    <div class="navbar-utente">
+        <span class="saluto">Ciao, <strong><?php echo $nomeAdmin; ?></strong></span>
+        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/logout.php" class="btn-esci">Esci</a>
     </div>
 </nav>

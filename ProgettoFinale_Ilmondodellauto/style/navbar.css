@@ -1,53 +1,142 @@
-body {
-    background-color: #F6F3ED;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: sans-serif;
-    color: black;
 }
 
-.navbar {
+body {
+    background-color: #F6F3ED;
+    color: #1a1a1a;
+}
+
+/* navbar principale */
+.navbar-sito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 30px;
     background-color: #F6F3ED;
     border-bottom: 1px solid lightgray;
 }
 
-.navbar-brand {
-    font-size: 18px;
+.navbar-logo a {
+    font-size: 20px;
     font-weight: bold;
     color: black;
+    text-decoration: none;
 }
 
-.navbar-brand em {
+.navbar-logo em {
     color: #1C3829;
     font-style: italic;
 }
 
-.nav-link {
+.navbar-logo span {
+    font-size: 11px;
     color: gray;
-    font-size: 13px;
+    margin-left: 8px;
 }
 
-.btn-login {
+/* link navbar */
+.navbar-links a {
+    color: gray;
+    text-decoration: none;
+    margin: 0 14px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.navbar-links a:hover {
+    color: black;
+}
+
+.navbar-links a.attivo {
+    color: #1C3829;
+    font-weight: bold;
+}
+
+/* lato destro navbar */
+.navbar-utente {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.saluto {
+    font-size: 13px;
+    color: gray;
+}
+
+.btn-esci {
+    color: #1C3829;
+    border: 1px solid #1C3829;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.btn-esci:hover {
     background-color: #1C3829;
     color: white;
-    padding: 7px 16px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 13px;
 }
 
-.btn-wish {
-    color: black;
-    text-decoration: none;
-    font-size: 13px;
-    border: 1px solid lightgray;
-    padding: 7px 13px;
-    border-radius: 6px;
-}
-
-.nav-username {
-    font-size: 13px;
+.navbar-utente a {
     color: gray;
+    text-decoration: none;
+    font-size: 13px;
 }
 
-.navbar .d-flex {
-    gap: 16px;
+.navbar-utente a.attivo {
+    color: #1C3829;
+    font-weight: bold;
+}
+
+/* bottone accedi */
+
+
+.pulsante-accedi:hover {
+    background-color: #2a6b45;
+    color: white;
+}
+
+/* navbar admin */
+.navbar-admin {
+    background-color: #1C3829;
+}
+
+.navbar-admin .navbar-logo a {
+    color: white;
+}
+
+.navbar-admin .navbar-logo em {
+    color: #a8d4b8;
+}
+
+.navbar-admin .navbar-logo span {
+    color: rgba(255,255,255,0.5);
+}
+
+.navbar-admin .navbar-links a {
+    color: rgba(255,255,255,0.7);
+}
+
+.navbar-admin .navbar-links a:hover {
+    color: white;
+}
+
+.navbar-admin .navbar-links a.attivo {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-admin .saluto {
+    color: rgba(255,255,255,0.7);
+}
+
+.navbar-admin .btn-esci {
+    color: white;
+    border-color: rgba(255,255,255,0.4);
 }

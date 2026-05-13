@@ -3,6 +3,7 @@ body {
     font-family: sans-serif;
 }
 
+/* sezione hero con immagine di sfondo */
 .hero {
     position: relative;
     height: 90vh;
@@ -53,6 +54,7 @@ body {
     margin-bottom: 28px;
 }
 
+/* bottone sfoglia catalogo */
 .btn-catalogo {
     background: white;
     color: #1C3829;
@@ -61,20 +63,26 @@ body {
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
+    transition: 0.2s;
 }
 
+.btn-catalogo:hover {
+    background-color: #F6F3ED;
+}
+
+/* immagine pausa centrale */
 .img-pausa {
     padding: 40px;
 }
 
 .img-pausa img {
     width: 100%;
-    height: 380px;
-    object-fit: cover;
+    height: auto;
     display: block;
     border-radius: 16px;
 }
 
+/* sezione contatti */
 .sezione-contatti {
     padding: 70px 40px;
     border-bottom: 1px solid lightgray;
@@ -88,7 +96,7 @@ body {
 
 .sezione-contatti p {
     font-size: 14px;
-    color: #444;
+    color: gray;
     line-height: 1.8;
 }
 
@@ -97,6 +105,12 @@ body {
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.link-verde:hover {
+    text-decoration: underline;
 }
 
 .etichetta {
@@ -107,6 +121,7 @@ body {
     margin-bottom: 8px;
 }
 
+/* tabella orari */
 .orari-table {
     width: 100%;
     border-collapse: collapse;
@@ -119,7 +134,7 @@ body {
 .orari-table td {
     padding: 10px 0;
     font-size: 14px;
-    color: #444;
+    color: gray;
 }
 
 .orari-table td:first-child {
@@ -128,6 +143,7 @@ body {
     width: 40%;
 }
 
+/* striscia loghi in fondo */
 .sezione-loghi {
     background-color: #1C3829;
     padding: 44px 40px;
@@ -157,11 +173,6 @@ body {
 }
 
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 36px;
-    }
-    .hero-overlay {
-        left: 24px;
-        bottom: 40px;
-    }
+    .hero h1 { font-size: 36px; }
+    .hero-overlay { left: 24px; bottom: 40px; }
 }
