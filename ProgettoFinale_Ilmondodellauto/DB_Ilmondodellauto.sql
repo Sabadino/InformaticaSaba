@@ -69,3 +69,15 @@ CREATE TABLE prenotazione (
     FOREIGN KEY (ID_Utente) REFERENCES utente(ID),
     FOREIGN KEY (ID_Macchina) REFERENCES macchina(ID) ON DELETE CASCADE
 );
+
+
+
+INSERT INTO macchina (Marca, Modello, Anno, Stato, Cilindrata, PotenzaKw, Cavalli, Chilometraggio, Carrozzeria, ColoreInterni, TipoVeicolo, Neopatentati, Targa, Descrizione, Prezzo) VALUES
+('BMW', 'Serie 3', 2019, 'Disponibile', 1998, 140, 190, 85000, 'Berlina', 'Nero', 'Usato', 0, 'FL519KX', 'BMW Serie 3 in ottime condizioni.', 22500),
+('Audi', 'A4', 2020, 'Disponibile', 1984, 110, 150, 62000, 'Berlina', 'Beige', 'Usato', 0, 'GH320AB', 'Audi A4 con optional completi.', 27000),
+('Volkswagen', 'Golf', 2018, 'Disponibile', 1598, 85, 115, 110000, 'Due Volumi', 'Grigio', 'Usato', 1, 'EK218CD', 'Golf 1.6 TDI adatta neopatentati.', 14900);
+
+INSERT INTO macchina_immagini (ID_Macchina, URL, Ordine) VALUES
+(1, 'uploads/bmw.jpg', 0),
+(2, 'uploads/audi.jpg', 0),
+(3, 'uploads/golf.jpg', 0);

@@ -1,23 +1,10 @@
 <?php
+// prendo la connessione al database
 $db = DBHandler::getPDO();
 
-$sql = "SELECT m.*, mi.URL as Immagine 
-        FROM macchina m 
-        LEFT JOIN macchina_immagini mi ON m.ID = mi.ID_Macchina AND mi.Ordine = 0 
-        WHERE m.Stato = 'Disponibile'";
-
-$params = [];
-
-if (isset($_GET['marca']) && $_GET['marca'] != '') {
-    $sql .= " AND m.Marca = ?";
-    $params[] = $_GET['marca'];
-}
-
-$stmt = $db->prepare($sql);
-$stmt->execute($params);
-$autoRows = $stmt->fetchAll();
-
-$marche = $db->query("SELECT DISTINCT Marca FROM macchina ORDER BY Marca")->fetchAll();
+// prendo tutte le auto disponibili
+$stmt = $db->query("SELECT * FROM macchina WHERE Stato = 'Disponibile'");
+$auto = $stmt->fetchAll();
 ?>
 
 <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/catalogo.css">
@@ -25,41 +12,46 @@ $marche = $db->query("SELECT DISTINCT Marca FROM macchina ORDER BY Marca")->fetc
 <div class="container mt-4">
 
     <h1>Catalogo auto</h1>
-    
-    <br><br>
 
+    <br>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
     <?php
-    if (count($autoRows) == 0) {
-        echo "<p>Nessuna auto trovata.</p>";
-    } else {
-        foreach ($autoRows as $auto) {
-            echo "<div class='col'>
-                <div class='card h-100'>
-                    <a href='dettaglio.php?id=" . $auto['ID'] . "'>";
-                    if ($auto['Immagine']) {
-                        echo "<img src='/InformaticaSaba/ProgettoFinale_Ilmondodellauto/" . $auto['Immagine'] . "' class='card-img-top' alt='" . $auto['Marca'] . "'>";
-                    } else {
-                        echo "<div class='no-foto'>Nessuna foto</div>";
-                    }
-                    echo "</a>
-                    <div class='card-body'>
-                        <p class='car-marca'>" . $auto['Marca'] . "</p>
-                        <h5 class='card-title'>" . $auto['Modello'] . "</h5>
-                        <div class='d-flex gap-2 mb-2'>
-                            <span class='badge-spec'>" . $auto['Cavalli'] . " CV</span>
-                            <span class='badge-spec'>" . $auto['Anno'] . "</span>
-                            <span class='badge-spec'>" . $auto['Carrozzeria'] . "</span>
-                        </div>
-                        <div class='d-flex justify-content-between align-items-center mt-3'>
-                            <strong>€ " . number_format($auto['Prezzo'], 0, ',', '.') . "</strong>
-                            <a href='dettaglio.php?id=" . $auto['ID'] . "' class='btn-verde-sm'>Vedi →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>";
+    // ciclo su ogni auto trovata
+    foreach ($auto as $a) {
+
+        // per ogni auto prendo la prima foto
+        $stmtFoto = $db->prepare("SELECT URL FROM macchina_immagini WHERE ID_Macchina = ? AND Ordine = 0");
+        $stmtFoto->execute([$a['ID']]);
+        $foto = $stmtFoto->fetch();
+
+        echo "<div class='col'>
+            <div class='card h-100'>";
+
+        // se c'è la foto la mostro altrimenti placeholder
+        if ($foto) {
+            echo "<a href='dettaglio.php?id=" . $a['ID'] . "'>
+                    <img src='/InformaticaSaba/ProgettoFinale_Ilmondodellauto/" . $foto['URL'] . "' class='card-img-top' alt='" . $a['Marca'] . "'>
+                  </a>";
+        } else {
+            echo "<div class='no-foto'>Nessuna foto</div>";
         }
+
+        echo "<div class='card-body'>
+            <p class='car-marca'>" . $a['Marca'] . "</p>
+            <h5>" . $a['Modello'] . "</h5>
+            <div>
+                <span class='badge-spec'>" . $a['Cavalli'] . " CV</span>
+                <span class='badge-spec'>" . $a['Anno'] . "</span>
+                <span class='badge-spec'>" . $a['Carrozzeria'] . "</span>
+            </div>
+            <br>
+            <strong>€ " . number_format($a['Prezzo'], 0, ',', '.') . "</strong>
+            <br>
+            <a href='dettaglio.php?id=" . $a['ID'] . "' class='btn-verde-sm'>Vedi →</a>
+        </div>
+        </div>
+    </div>";
     }
     ?>
     </div>

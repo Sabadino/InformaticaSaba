@@ -1,8 +1,11 @@
 <?php
+// prendo la connessione al database
 $db = DBHandler::getPDO();
 
+// prendo tutte le auto ordinate per id decrescente
+// cosi le ultime aggiunte sono in cima
 $stmt = $db->query("SELECT * FROM macchina ORDER BY ID DESC");
-$autoRows = $stmt->fetchAll();
+$auto = $stmt->fetchAll();
 ?>
 
 <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/admin.css">
@@ -11,13 +14,16 @@ $autoRows = $stmt->fetchAll();
 
     <h2>Gestione Auto</h2>
 
+    <br>
+
     <?php
+    // mostro messaggio di successo o errore
     if (isset($_GET['successo'])) echo "<div class='alert-successo'>Operazione completata.</div>";
     if (isset($_GET['errore'])) echo "<div class='alert-errore'>Qualcosa è andato storto.</div>";
-    
     ?>
 
-    <table class="admin-table mt-3">
+    <!-- tabella con tutte le auto -->
+    <table class="admin-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -31,25 +37,33 @@ $autoRows = $stmt->fetchAll();
         </thead>
         <tbody>
         <?php
-        foreach ($autoRows as $auto) {
+        // ciclo su ogni auto e creo una riga della tabella
+        foreach ($auto as $a) {
             echo "<tr>
-                <td>" . $auto['ID'] . "</td>
-                <td>" . $auto['Marca'] . "</td>
-                <td>" . $auto['Modello'] . "</td>
-                <td>" . $auto['Anno'] . "</td>
-                <td>€ " . number_format($auto['Prezzo'], 0, ',', '.') . "</td>
-                <td>" . $auto['Stato'] . "</td>
-                <td><a href='gestioneAuto_action.php?azione=elimina&id=" . $auto['ID'] . "' onclick='return confirm(\"Sicuro?\")' class='btn-elimina'>Elimina</a></td>
+                <td>" . $a['ID'] . "</td>
+                <td>" . $a['Marca'] . "</td>
+                <td>" . $a['Modello'] . "</td>
+                <td>" . $a['Anno'] . "</td>
+                <td>€ " . number_format($a['Prezzo'], 0, ',', '.') . "</td>
+                <td>" . $a['Stato'] . "</td>
+                <td><a href='gestioneAuto_action.php?azione=elimina&id=" . $a['ID'] . "' onclick='return confirm(\"Sicuro?\")' class='btn-elimina'>Elimina</a></td>
             </tr>";
         }
         ?>
         </tbody>
     </table>
 
-    <h3 class="mt-5">Aggiungi auto</h3>
+    <br><br>
 
-    <form action="gestioneAuto_action.php" method="POST" enctype="multipart/form-data" class="mt-3">
+    <h3>Aggiungi auto</h3>
+
+    <br>
+
+    <!-- form per aggiungere una nuova auto -->
+    <form action="gestioneAuto_action.php" method="POST">
+
         <input type="hidden" name="azione" value="aggiungi">
+
         <div class="row g-3">
             <div class="col-md-4">
                 <div class="fg"><label>Marca</label><input type="text" name="marca" required></div>
@@ -61,7 +75,7 @@ $autoRows = $stmt->fetchAll();
                 <div class="fg"><label>Anno</label><input type="number" name="anno" required></div>
             </div>
             <div class="col-md-4">
-                <div class="fg"><label>Cilindrata</label><input type="number" step="0.1" name="cilindrata" required></div>
+                <div class="fg"><label>Cilindrata (cc)</label><input type="number" name="cilindrata" required></div>
             </div>
             <div class="col-md-4">
                 <div class="fg"><label>Potenza KW</label><input type="number" name="potenzakw" required></div>
@@ -94,7 +108,7 @@ $autoRows = $stmt->fetchAll();
                 <div class="fg"><label>Targa</label><input type="text" name="targa" required></div>
             </div>
             <div class="col-md-4">
-                <div class="fg"><label>Prezzo</label><input type="number" step="0.01" name="prezzo" required></div>
+                <div class="fg"><label>Prezzo (€)</label><input type="number" name="prezzo" required></div>
             </div>
             <div class="col-md-4">
                 <div class="fg">
@@ -108,11 +122,12 @@ $autoRows = $stmt->fetchAll();
             <div class="col-md-8">
                 <div class="fg"><label>Descrizione</label><textarea name="descrizione" rows="3"></textarea></div>
             </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Foto</label><input type="file" name="foto" accept="image/*"></div>
-            </div>
         </div>
-        <button type="submit" class="mt-3">Aggiungi auto</button>
+
+        <br>
+
+        <button type="submit">Aggiungi auto</button>
+
     </form>
 
 </div>

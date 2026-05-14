@@ -1,7 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) session_start();
+// prendo il nome della pagina attuale
 $current_page = basename($_SERVER['PHP_SELF']);
-$nomeAdmin = isset($_SESSION['utente_nome']) ? $_SESSION['utente_nome'] : 'Admin';
 ?>
 
 <!DOCTYPE html>
@@ -16,18 +15,23 @@ $nomeAdmin = isset($_SESSION['utente_nome']) ? $_SESSION['utente_nome'] : 'Admin
 <body>
 
 <nav class="navbar-sito navbar-admin">
+
     <div class="navbar-logo">
+        <!-- logo che porta alla home -->
         <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/index.php">Il Mondo <em>dell'Auto</em></a>
-        <span>Area Admin</span>
+        <span>Admin</span>
     </div>
 
     <div class="navbar-links">
-        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/adminpages/gestioneAuto.php" class="<?= ($current_page == 'gestioneAuto.php') ? 'attivo' : ''; ?>">Gestione Auto</a>
-        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/adminpages/gestionePrenotazioni.php" class="<?= ($current_page == 'gestionePrenotazioni.php') ? 'attivo' : ''; ?>">Prenotazioni</a>
+        <!-- evidenzio la pagina attiva -->
+        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/adminpages/gestioneAuto.php" class="<?= ($current_page == 'gestioneAuto.php') ? 'attivo' : '' ?>">Gestione Auto</a>
+        <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/adminpages/gestionePrenotazioni.php" class="<?= ($current_page == 'gestionePrenotazioni.php') ? 'attivo' : '' ?>">Prenotazioni</a>
     </div>
 
     <div class="navbar-utente">
-        <span class="saluto">Ciao, <strong><?php echo $nomeAdmin; ?></strong></span>
+        <!-- mostro il nome admin e il bottone esci -->
+        <span class="saluto">Ciao, <?php echo $_SESSION['utente_nome'] ?></span>
         <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/logout.php" class="btn-esci">Esci</a>
     </div>
+
 </nav>

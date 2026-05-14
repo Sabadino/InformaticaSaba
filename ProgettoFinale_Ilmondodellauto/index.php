@@ -26,7 +26,7 @@ session_start();
 </div>
 
 <div class="img-pausa">
-    <img src="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/bg2.jpg" alt="">
+    <img src="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/bg3.jpg" alt="">
 </div>
 
 <div class="sezione-contatti">
