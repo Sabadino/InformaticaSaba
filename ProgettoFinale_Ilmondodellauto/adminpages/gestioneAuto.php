@@ -14,6 +14,7 @@ $autoRows = $stmt->fetchAll();
     <?php
     if (isset($_GET['successo'])) echo "<div class='alert-successo'>Operazione completata.</div>";
     if (isset($_GET['errore'])) echo "<div class='alert-errore'>Qualcosa è andato storto.</div>";
+    
     ?>
 
     <table class="admin-table mt-3">

@@ -20,7 +20,7 @@ session_start();
     <div class="hero-overlay">
         <p class="hero-etichetta">Concessionario certificato · Mestre, Venezia</p>
         <h1>Il Mondo <em>dell'Auto</em></h1>
-        <p class="hero-sub">Usato, nuovo e km zero. Dal 2005 aiutiamo i clienti di Mestre a trovare l'auto giusta.</p>
+        <p class="hero-sub">Dal 2005 aiutiamo i clienti di Mestre a trovare l'auto usata giusta o a vendere la propria.</p>
         <a href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/catalogo.php" class="btn-catalogo">Sfoglia il catalogo →</a>
     </div>
 </div>

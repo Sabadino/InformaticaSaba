@@ -25,19 +25,9 @@ $marche = $db->query("SELECT DISTINCT Marca FROM macchina ORDER BY Marca")->fetc
 <div class="container mt-4">
 
     <h1>Catalogo auto</h1>
+    
+    <br><br>
 
-    <form method="GET" class="mb-4 d-flex gap-2">
-        <select name="marca" class="form-select w-auto">
-            <option value="">Tutte le marche</option>
-            <?php
-            foreach ($marche as $m) {
-                $sel = (isset($_GET['marca']) && $_GET['marca'] == $m['Marca']) ? 'selected' : '';
-                echo "<option value='" . $m['Marca'] . "' " . $sel . ">" . $m['Marca'] . "</option>";
-            }
-            ?>
-        </select>
-        <button type="submit" class="btn-cerca">Cerca</button>
-    </form>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
     <?php
