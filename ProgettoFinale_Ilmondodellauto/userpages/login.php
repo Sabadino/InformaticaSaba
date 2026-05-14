@@ -1,5 +1,6 @@
 <?php
-if(isset($_SESSION['utente_id'])) {
+// se sei già loggato non hai motivo di stare qui
+if (isset($_SESSION['utente_id'])) {
     header('Location: catalogo.php');
     exit;
 }
@@ -10,30 +11,41 @@ if(isset($_SESSION['utente_id'])) {
 <div class="auth-wrap">
     <div class="auth-card">
 
-        <h4 class="text-center mb-1">Il Mondo <em>dell'Auto</em></h4>
-        <p class="text-center text-muted mb-4">Accedi per prenotare e salvare le auto</p>
+        <h4>Il Mondo <em>dell'Auto</em></h4>
 
-        <h2 class="mb-3">Bentornato</h2>
+        <br><br>
+
+        <h2>Bentornato</h2>
+
+        <br>
 
         <?php
-        if(isset($_GET['errore'])) {
+        // se nell'url c'è ?errore=1 mostro il messaggio di errore
+        if (isset($_GET['errore'])) {
             echo "<div class='alert-errore'>Email o password errati</div>";
         }
         ?>
 
+        <!-- il form manda i dati a login_action.php con metodo POST -->
         <form action="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/login_action.php" method="POST">
+
             <div class="fg">
                 <label>Email</label>
                 <input type="email" name="email" required>
             </div>
+
             <div class="fg">
                 <label>Password</label>
                 <input type="password" name="password" required>
             </div>
+
             <button type="submit">Accedi</button>
+
         </form>
 
-        <p class="text-center mt-3">Non hai un account? <a href="register.php">Registrati</a></p>
+        <br>
+
+        <p>Non hai un account? <a href="register.php">Registrati</a></p>
 
     </div>
 </div>

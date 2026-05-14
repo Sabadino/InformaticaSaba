@@ -1,30 +1,26 @@
--- Active: 1778407078037@@127.0.0.1@3306@concessionario
-CREATE DATABASE Concessionario;
+CREATE DATABASE concessionario;
 
-USE Concessionario;
+USE concessionario;
 
-CREATE TABLE UTENTE (
+CREATE TABLE utente (
     ID INT NOT NULL AUTO_INCREMENT,
     Nome VARCHAR(255) NOT NULL,
     Cognome VARCHAR(255) NOT NULL,
-    Email VARCHAR(255) NOT NULL,
-    Username VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    Username VARCHAR(255) NOT NULL UNIQUE,
     Telefono VARCHAR(20),
     Password VARCHAR(255) NOT NULL,
     Ruolo ENUM('utente', 'admin') DEFAULT 'utente',
-    PRIMARY KEY (ID),
-    UNIQUE (Email),
-    UNIQUE (Username),
-    CHECK (Email LIKE '%@%.%')
+    PRIMARY KEY (ID)
 );
 
-CREATE TABLE MACCHINA (
+CREATE TABLE macchina (
     ID INT NOT NULL AUTO_INCREMENT,
     Marca VARCHAR(255) NOT NULL,
     Modello VARCHAR(255) NOT NULL,
-    Anno SMALLINT NOT NULL,
+    Anno INT NOT NULL,
     Stato ENUM('Disponibile', 'Prenotata', 'Venduta') DEFAULT 'Disponibile',
-    Cilindrata DECIMAL(5,1) NOT NULL,
+    Cilindrata INT NOT NULL,
     PotenzaKw INT NOT NULL,
     Cavalli INT NOT NULL,
     Chilometraggio INT NOT NULL,
@@ -34,42 +30,35 @@ CREATE TABLE MACCHINA (
     Neopatentati BOOLEAN DEFAULT FALSE,
     Targa VARCHAR(10) NOT NULL UNIQUE,
     Descrizione TEXT,
-    Prezzo DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (ID),
-    CHECK (Cilindrata > 0),
-    CHECK (PotenzaKw > 0),
-    CHECK (Cavalli > 0),
-    CHECK (Chilometraggio >= 0),
-    CHECK (Prezzo > 0)
+    Prezzo INT NOT NULL,
+    PRIMARY KEY (ID)
 );
 
-CREATE TABLE MACCHINA_IMMAGINI (
+CREATE TABLE macchina_immagini (
     ID INT NOT NULL AUTO_INCREMENT,
     ID_Macchina INT NOT NULL,
     URL VARCHAR(255) NOT NULL,
     Ordine INT NOT NULL,
     PRIMARY KEY (ID),
-    CHECK (Ordine >= 0),
-    FOREIGN KEY (ID_Macchina) REFERENCES MACCHINA(ID) ON DELETE CASCADE
+    FOREIGN KEY (ID_Macchina) REFERENCES macchina(ID) ON DELETE CASCADE
 );
 
-CREATE TABLE ACCESSORI (
+CREATE TABLE accessori (
     ID INT NOT NULL AUTO_INCREMENT,
     Nome VARCHAR(255) NOT NULL,
     Categoria ENUM('Sicurezza', 'Comfort', 'Estetica', 'Tecnologia', 'Altro'),
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE MACCHINA_ACCESSORI (
+CREATE TABLE macchina_accessori (
     ID_Macchina INT NOT NULL,
     ID_Accessorio INT NOT NULL,
     PRIMARY KEY (ID_Macchina, ID_Accessorio),
-    FOREIGN KEY (ID_Macchina) REFERENCES MACCHINA(ID) ON DELETE CASCADE,
-    FOREIGN KEY (ID_Accessorio) REFERENCES ACCESSORI(ID) ON DELETE CASCADE
+    FOREIGN KEY (ID_Macchina) REFERENCES macchina(ID) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Accessorio) REFERENCES accessori(ID) ON DELETE CASCADE
 );
 
-
-CREATE TABLE PRENOTAZIONE (
+CREATE TABLE prenotazione (
     ID INT NOT NULL AUTO_INCREMENT,
     ID_Utente INT NOT NULL,
     ID_Macchina INT NOT NULL,
@@ -77,15 +66,6 @@ CREATE TABLE PRENOTAZIONE (
     DataOraPrenotazione DATETIME NOT NULL,
     Stato ENUM('In attesa', 'Confermata', 'Annullata', 'Completata') DEFAULT 'In attesa',
     PRIMARY KEY (ID),
-    FOREIGN KEY (ID_Utente) REFERENCES UTENTE(ID),
-    FOREIGN KEY (ID_Macchina) REFERENCES MACCHINA(ID) ON DELETE CASCADE
+    FOREIGN KEY (ID_Utente) REFERENCES utente(ID),
+    FOREIGN KEY (ID_Macchina) REFERENCES macchina(ID) ON DELETE CASCADE
 );
-
-CREATE TABLE MACCHINE_SALVATE (
-    ID_Utente INT NOT NULL,
-    ID_Macchina INT NOT NULL,
-    PRIMARY KEY (ID_Utente, ID_Macchina),
-    FOREIGN KEY (ID_Utente) REFERENCES UTENTE(ID) ON DELETE CASCADE,
-    FOREIGN KEY (ID_Macchina) REFERENCES MACCHINA(ID) ON DELETE CASCADE
-);
-
