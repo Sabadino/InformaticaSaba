@@ -7,10 +7,8 @@
 
 body {
     background-color: #F6F3ED;
-    color: #1a1a1a;
 }
 
-/* navbar principale */
 .navbar-sito {
     display: flex;
     justify-content: space-between;
@@ -38,25 +36,20 @@ body {
     margin-left: 8px;
 }
 
-/* link navbar */
 .navbar-links a {
     color: gray;
     text-decoration: none;
     margin: 0 14px;
     font-size: 14px;
-    transition: 0.2s;
 }
 
-.navbar-links a:hover {
-    color: black;
-}
+.navbar-links a:hover { color: black; }
 
 .navbar-links a.attivo {
     color: #1C3829;
     font-weight: bold;
 }
 
-/* lato destro navbar */
 .navbar-utente {
     display: flex;
     align-items: center;
@@ -75,12 +68,6 @@ body {
     border-radius: 6px;
     text-decoration: none;
     font-size: 13px;
-    transition: 0.2s;
-}
-
-.btn-esci:hover {
-    background-color: #1C3829;
-    color: white;
 }
 
 .navbar-utente a {
@@ -89,54 +76,32 @@ body {
     font-size: 13px;
 }
 
-.navbar-utente a.attivo {
-    color: #1C3829;
-    font-weight: bold;
-}
-
-/* bottone accedi */
-
-
-.pulsante-accedi:hover {
-    background-color: #2a6b45;
-    color: white;
-}
-
-/* navbar admin */
 .navbar-admin {
     background-color: #1C3829;
 }
 
-.navbar-admin .navbar-logo a {
-    color: white;
+.navbar-admin .navbar-logo a { color: white; }
+.navbar-admin .navbar-logo em { color: #a8d4b8; }
+.navbar-admin .navbar-logo span { color: rgba(255,255,255,0.5); }
+.navbar-admin .navbar-links a { color: rgba(255,255,255,0.7); }
+.navbar-admin .navbar-links a:hover { color: white; }
+.navbar-admin .navbar-links a.attivo { color: white; font-weight: bold; }
+.navbar-admin .saluto { color: rgba(255,255,255,0.7); }
+.navbar-admin .btn-esci { color: white; border-color: rgba(255,255,255,0.4); }
+
+.container-wrap {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 30px;
 }
 
-.navbar-admin .navbar-logo em {
-    color: #a8d4b8;
-}
-
-.navbar-admin .navbar-logo span {
-    color: rgba(255,255,255,0.5);
-}
-
-.navbar-admin .navbar-links a {
-    color: rgba(255,255,255,0.7);
-}
-
-.navbar-admin .navbar-links a:hover {
-    color: white;
-}
-
-.navbar-admin .navbar-links a.attivo {
-    color: white;
-    font-weight: bold;
-}
-
-.navbar-admin .saluto {
-    color: rgba(255,255,255,0.7);
-}
-
-.navbar-admin .btn-esci {
-    color: white;
-    border-color: rgba(255,255,255,0.4);
+@media (max-width: 768px) {
+    .navbar-sito {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px 16px;
+    }
+    .navbar-links a { margin: 0 10px 0 0; }
+    .container-wrap { padding: 0 16px; margin: 20px auto; }
 }

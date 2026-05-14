@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/navbar.css">
 
-<div class="container mt-4">
+<div class="container-wrap">
 
     <h2>Contatti</h2>
 
@@ -16,7 +16,7 @@
 
     <br>
 
-    <p><strong>Orari</strong></p>
+    <p>Orari:</p>
     <p>Lunedì - Venerdì: 8:30 – 12:30 / 14:30 – 19:30</p>
     <p>Sabato: 8:30 – 12:30 / 14:30 – 17:30</p>
     <p>Domenica: chiuso</p>

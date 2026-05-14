@@ -3,7 +3,6 @@ body {
     font-family: sans-serif;
 }
 
-/* sezione hero con immagine di sfondo */
 .hero {
     position: relative;
     height: 90vh;
@@ -54,7 +53,6 @@ body {
     margin-bottom: 28px;
 }
 
-/* bottone sfoglia catalogo */
 .btn-catalogo {
     background: white;
     color: #1C3829;
@@ -63,26 +61,21 @@ body {
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
-    transition: 0.2s;
 }
 
-.btn-catalogo:hover {
-    background-color: #F6F3ED;
-}
-
-/* immagine pausa centrale */
 .img-pausa {
     padding: 40px;
 }
 
 .img-pausa img {
     width: 100%;
-    height: auto;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
     display: block;
     border-radius: 16px;
 }
 
-/* sezione contatti */
 .sezione-contatti {
     padding: 70px 40px;
     border-bottom: 1px solid lightgray;
@@ -109,10 +102,6 @@ body {
     margin-bottom: 4px;
 }
 
-.link-verde:hover {
-    text-decoration: underline;
-}
-
 .etichetta {
     font-size: 11px;
     text-transform: uppercase;
@@ -121,15 +110,12 @@ body {
     margin-bottom: 8px;
 }
 
-/* tabella orari */
 .orari-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.orari-table tr {
-    border-bottom: 1px solid lightgray;
-}
+.orari-table tr { border-bottom: 1px solid lightgray; }
 
 .orari-table td {
     padding: 10px 0;
@@ -143,7 +129,6 @@ body {
     width: 40%;
 }
 
-/* striscia loghi in fondo */
 .sezione-loghi {
     background-color: #1C3829;
     padding: 44px 40px;
@@ -175,4 +160,7 @@ body {
 @media (max-width: 768px) {
     .hero h1 { font-size: 36px; }
     .hero-overlay { left: 24px; bottom: 40px; }
+    .img-pausa { padding: 16px; }
+    .sezione-contatti { padding: 40px 16px; }
+    .loghi-grid { gap: 30px; }
 }

@@ -3,28 +3,17 @@ body {
     font-family: sans-serif;
 }
 
-/* card singola prenotazione */
 .prenotazione-card {
     background: white;
     border: 1px solid lightgray;
     border-radius: 10px;
     padding: 20px;
-    transition: 0.2s;
+    max-width: 600px;
 }
 
-.prenotazione-card:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+.prenotazione-card h4 { margin: 0 0 8px 0; }
+.prenotazione-card p { margin: 4px 0; font-size: 14px; color: gray; }
 
-/* badge stato */
-.stato-badge {
-    font-size: 12px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 500;
+@media (max-width: 600px) {
+    .prenotazione-card { padding: 14px; }
 }
-
-.stato-in-attesa { background: #fff3cd; color: #856404; }
-.stato-confermata { background: #d1fae5; color: #065f46; }
-.stato-annullata { background: pink; color: red; }
-.stato-completata { background: #e0e7ff; color: #3730a3; }

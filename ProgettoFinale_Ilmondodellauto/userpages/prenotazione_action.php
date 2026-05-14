@@ -1,32 +1,19 @@
 <?php
-// avvio la sessione per leggere utente_id
 session_start();
-
-// carico dbhandler
 require_once('../include/DBHandler.php');
 
-// prendo la connessione
-$db = DBHandler::getPDO();
+$pdo = DBHandler::getPDO();
 
-// inserisco la prenotazione nel database
-// prendo i dati dal form con $_POST e l'utente dalla sessione
-try {
+$idMacchina = htmlspecialchars($_POST['id_macchina']);
+$tipo = htmlspecialchars($_POST['tipo']);
+$idUtente = $_SESSION['utente_id'];
 
-    $stmt = $db->prepare("INSERT INTO prenotazione (ID_Utente, ID_Macchina, TipoPrenotazione, DataOraPrenotazione) VALUES (?, ?, ?, ?)");
+// data attuale
+$data = date('Y-m-d H:i:s');
 
-    $stmt->execute([
-        $_SESSION['utente_id'],
-        $_POST['id_macchina'],
-        $_POST['tipo'],
-        $_POST['data']
-    ]);
+// inserisco prenotazione
+$sql = "INSERT INTO prenotazione (ID_Utente, ID_Macchina, TipoPrenotazione, DataOraPrenotazione) VALUES ('$idUtente', '$idMacchina', '$tipo', '$data')";
+$pdo->exec($sql);
 
-    // prenotazione inserita - mando alle mie prenotazioni
-    header('Location: miePrenotazioni.php');
-    exit();
-
-} catch (PDOException $e) {
-    // qualcosa è andato storto - rimando con errore
-    header('Location: prenotazione.php?id=' . $_POST['id_macchina'] . '&errore=1');
-    exit();
-}
+header('Location: miePrenotazioni.php');
+exit();

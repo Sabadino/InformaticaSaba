@@ -1,99 +1,87 @@
 <?php
-// se non c'è l'id nell'url rimando al catalogo
 if (!isset($_GET['id'])) {
     header('Location: catalogo.php');
     exit;
 }
 
-// prendo la connessione al database
-$db = DBHandler::getPDO();
-
-// prendo l'id dall'url es. dettaglio.php?id=10
+$pdo = DBHandler::getPDO();
 $id = $_GET['id'];
 
-// prendo i dati dell'auto con quell'id
-$stmt = $db->prepare("SELECT * FROM macchina WHERE ID = ?");
-$stmt->execute([$id]);
-$auto = $stmt->fetch();
+// prendo auto
+$sql = "SELECT * FROM macchina WHERE ID = :id";
+$sth = $pdo->prepare($sql);
+$sth->bindParam(':id', $id, PDO::PARAM_INT); // bindParam per id numerico dall'url
+$sth->execute();
+$auto = $sth->fetch(PDO::FETCH_ASSOC);
 
-// se l'auto non esiste rimando al catalogo
 if (!$auto) {
     header('Location: catalogo.php');
     exit;
 }
 
-// prendo tutte le foto di questa auto in ordine
-$stmtFoto = $db->prepare("SELECT URL FROM macchina_immagini WHERE ID_Macchina = ? ORDER BY Ordine");
-$stmtFoto->execute([$id]);
-$foto = $stmtFoto->fetchAll();
+// prendo foto
+$sql2 = "SELECT URL FROM macchina_immagini WHERE ID_Macchina = '$id' ORDER BY Ordine";
+$sth2 = $pdo->prepare($sql2);
+$sth2->execute();
+$foto = $sth2->fetchAll(PDO::FETCH_ASSOC);
 
-// prendo gli accessori di questa auto
-// faccio un join tra accessori e macchina_accessori
-$stmtAcc = $db->prepare("SELECT accessori.Nome FROM accessori JOIN macchina_accessori ON accessori.ID = macchina_accessori.ID_Accessorio WHERE macchina_accessori.ID_Macchina = ?");
-$stmtAcc->execute([$id]);
-$accessori = $stmtAcc->fetchAll();
+// prendo accessori
+$sql3 = "SELECT accessori.Nome FROM accessori JOIN macchina_accessori ON accessori.ID = macchina_accessori.ID_Accessorio WHERE macchina_accessori.ID_Macchina = '$id'";
+$sth3 = $pdo->prepare($sql3);
+$sth3->execute();
+$accessori = $sth3->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/dettaglio.css">
 
-<div class="container mt-4">
+<div class="det-wrap">
 
     <a href="catalogo.php">← Torna al catalogo</a>
 
     <br><br>
 
-    <div class="row g-4">
-        <div class="col-md-6">
+    <div class="det-grid">
+        <div class="det-sinistra">
 
-            <?php
-            // mostro le foto se ci sono
-            if (count($foto) > 0) {
-                // prima foto grande
-                echo "<img src='/InformaticaSaba/ProgettoFinale_Ilmondodellauto/" . $foto[0]['URL'] . "' class='foto-principale' alt='" . $auto['Marca'] . "'>";
-
-                // thumbnails sotto
-                echo "<div class='thumbnails mt-2 d-flex gap-2'>";
-                foreach ($foto as $f) {
-                    echo "<img src='/InformaticaSaba/ProgettoFinale_Ilmondodellauto/" . $f['URL'] . "' class='thumbnail' alt=''>";
-                }
-                echo "</div>";
-            } else {
-                echo "<div class='no-foto'>Nessuna foto</div>";
-            }
-            ?>
+            <?php if (count($foto) > 0) { ?>
+                <img src="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/<?php echo $foto[0]['URL']; ?>" class="foto-principale" alt="<?php echo $auto['Marca']; ?>">
+                <div class="thumbnails">
+                <?php foreach ($foto as $f) { ?>
+                    <img src="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/<?php echo $f['URL']; ?>" class="thumbnail" alt="">
+                <?php } ?>
+                </div>
+            <?php } else { ?>
+                <div class="no-foto">Nessuna foto</div>
+            <?php } ?>
 
             <br>
 
-            <div class="descrizione p-3">
+            <div class="descrizione">
                 <h5>Descrizione</h5>
                 <p><?php echo $auto['Descrizione']; ?></p>
             </div>
 
         </div>
 
-        <div class="col-md-6">
+        <div class="det-destra">
 
-            <p class="car-marca"><?php echo $auto['Marca']; ?></p>
+            <p class="auto-marca"><?php echo $auto['Marca']; ?></p>
             <h2><?php echo $auto['Modello']; ?></h2>
             <p><?php echo $auto['TipoVeicolo'] . ' · ' . $auto['Anno']; ?></p>
 
             <br>
 
-            <h3 class="prezzo">€ <?php echo number_format($auto['Prezzo'], 0, ',', '.'); ?></h3>
+            <h3>€ <?php echo number_format($auto['Prezzo'], 0, ',', '.'); ?></h3>
             <p>IVA inclusa</p>
 
             <br>
 
             <div class="ctas">
-                <?php
-                // se sei loggato mostro il bottone prenota
-                // altrimenti mando al login
-                if (isset($_SESSION['utente_id'])) {
-                    echo "<a href='prenotazione.php?id=" . $auto['ID'] . "' class='btn-prenota'>Prenota test drive</a>";
-                } else {
-                    echo "<a href='login.php' class='btn-prenota'>Prenota test drive</a>";
-                }
-                ?>
+                <?php if (isset($_SESSION['utente_id'])) { ?>
+                    <a href="prenotazione.php?id=<?php echo $auto['ID']; ?>" class="btn-prenota">Prenota test drive</a>
+                <?php } else { ?>
+                    <a href="login.php" class="btn-prenota">Prenota test drive</a>
+                <?php } ?>
                 <a href="https://wa.me/393802074281" target="_blank" class="btn-wa">WhatsApp</a>
                 <a href="https://www.subito.it" target="_blank" class="btn-subito">Vedi su Subito.it</a>
                 <a href="tel:+393802074281" class="btn-tel">Chiama</a>
@@ -103,7 +91,7 @@ $accessori = $stmtAcc->fetchAll();
 
             <div class="specifiche">
                 <h5>Specifiche</h5>
-                <table class="table table-sm">
+                <table>
                     <tr><td>Chilometri</td><td><?php echo number_format($auto['Chilometraggio'], 0, ',', '.'); ?> km</td></tr>
                     <tr><td>Potenza</td><td><?php echo $auto['Cavalli']; ?> CV</td></tr>
                     <tr><td>Cilindrata</td><td><?php echo $auto['Cilindrata']; ?> cc</td></tr>
@@ -114,18 +102,15 @@ $accessori = $stmtAcc->fetchAll();
                 </table>
             </div>
 
-            <?php
-            // mostro gli accessori solo se ce ne sono
-            if (count($accessori) > 0) {
-                echo "<br><div class='optional'>";
-                echo "<h5>Optional</h5>";
-                echo "<div class='d-flex flex-wrap gap-2'>";
-                foreach ($accessori as $acc) {
-                    echo "<span class='badge-acc'>" . $acc['Nome'] . "</span>";
-                }
-                echo "</div></div>";
-            }
-            ?>
+            <?php if (count($accessori) > 0) { ?>
+                <br>
+                <h5>Optional</h5>
+                <div class="accessori">
+                <?php foreach ($accessori as $acc) { ?>
+                    <span><?php echo $acc['Nome']; ?></span>
+                <?php } ?>
+                </div>
+            <?php } ?>
 
         </div>
     </div>

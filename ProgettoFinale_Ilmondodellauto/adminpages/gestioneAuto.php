@@ -1,28 +1,24 @@
 <?php
-// prendo la connessione al database
-$db = DBHandler::getPDO();
+$pdo = DBHandler::getPDO();
 
-// prendo tutte le auto ordinate per id decrescente
-// cosi le ultime aggiunte sono in cima
-$stmt = $db->query("SELECT * FROM macchina ORDER BY ID DESC");
-$auto = $stmt->fetchAll();
+// prendo tutte le auto
+$sql = "SELECT * FROM macchina ORDER BY ID DESC";
+$sth = $pdo->prepare($sql);
+$sth->execute();
+$auto = $sth->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/admin.css">
 
-<div class="container mt-4">
+<div class="container-wrap">
 
     <h2>Gestione Auto</h2>
 
     <br>
 
-    <?php
-    // mostro messaggio di successo o errore
-    if (isset($_GET['successo'])) echo "<div class='alert-successo'>Operazione completata.</div>";
-    if (isset($_GET['errore'])) echo "<div class='alert-errore'>Qualcosa è andato storto.</div>";
-    ?>
+    <?php if (isset($_GET['successo'])) { echo "<p style='color:green'>Operazione completata.</p>"; } ?>
+    <?php if (isset($_GET['errore'])) { echo "<p style='color:red'>Qualcosa è andato storto.</p>"; } ?>
 
-    <!-- tabella con tutte le auto -->
     <table class="admin-table">
         <thead>
             <tr>
@@ -36,20 +32,17 @@ $auto = $stmt->fetchAll();
             </tr>
         </thead>
         <tbody>
-        <?php
-        // ciclo su ogni auto e creo una riga della tabella
-        foreach ($auto as $a) {
-            echo "<tr>
-                <td>" . $a['ID'] . "</td>
-                <td>" . $a['Marca'] . "</td>
-                <td>" . $a['Modello'] . "</td>
-                <td>" . $a['Anno'] . "</td>
-                <td>€ " . number_format($a['Prezzo'], 0, ',', '.') . "</td>
-                <td>" . $a['Stato'] . "</td>
-                <td><a href='gestioneAuto_action.php?azione=elimina&id=" . $a['ID'] . "' onclick='return confirm(\"Sicuro?\")' class='btn-elimina'>Elimina</a></td>
-            </tr>";
-        }
-        ?>
+        <?php foreach ($auto as $a) { ?>
+            <tr>
+                <td><?php echo $a['ID']; ?></td>
+                <td><?php echo $a['Marca']; ?></td>
+                <td><?php echo $a['Modello']; ?></td>
+                <td><?php echo $a['Anno']; ?></td>
+                <td>€ <?php echo number_format($a['Prezzo'], 0, ',', '.'); ?></td>
+                <td><?php echo $a['Stato']; ?></td>
+                <td><a href="gestioneAuto_action.php?azione=elimina&id=<?php echo $a['ID']; ?>" onclick="return confirm('Sicuro?')" class="btn-elimina">Elimina</a></td>
+            </tr>
+        <?php } ?>
         </tbody>
     </table>
 
@@ -59,75 +52,47 @@ $auto = $stmt->fetchAll();
 
     <br>
 
-    <!-- form per aggiungere una nuova auto -->
     <form action="gestioneAuto_action.php" method="POST">
-
         <input type="hidden" name="azione" value="aggiungi">
-
-        <div class="row g-3">
-            <div class="col-md-4">
-                <div class="fg"><label>Marca</label><input type="text" name="marca" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Modello</label><input type="text" name="modello" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Anno</label><input type="number" name="anno" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Cilindrata (cc)</label><input type="number" name="cilindrata" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Potenza KW</label><input type="number" name="potenzakw" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Cavalli</label><input type="number" name="cavalli" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Chilometraggio</label><input type="number" name="chilometraggio" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg">
-                    <label>Carrozzeria</label>
-                    <select name="carrozzeria">
-                        <option value="Berlina">Berlina</option>
-                        <option value="Due Volumi">Due Volumi</option>
-                        <option value="Station Wagon">Station Wagon</option>
-                        <option value="SUV">SUV</option>
-                        <option value="City Car">City Car</option>
-                        <option value="Monovolume">Monovolume</option>
-                        <option value="Cabrio">Cabrio</option>
-                        <option value="Utilitaria">Utilitaria</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Colore interni</label><input type="text" name="coloreinterni"></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Targa</label><input type="text" name="targa" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg"><label>Prezzo (€)</label><input type="number" name="prezzo" required></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fg">
-                    <label>Neopatentati</label>
-                    <select name="neopatentati">
-                        <option value="0">No</option>
-                        <option value="1">Sì</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="fg"><label>Descrizione</label><textarea name="descrizione" rows="3"></textarea></div>
-            </div>
-        </div>
-
-        <br>
-
+        <label>Marca</label><br>
+        <input type="text" name="marca" required><br><br>
+        <label>Modello</label><br>
+        <input type="text" name="modello" required><br><br>
+        <label>Anno</label><br>
+        <input type="number" name="anno" required><br><br>
+        <label>Cilindrata (cc)</label><br>
+        <input type="number" name="cilindrata" required><br><br>
+        <label>Potenza KW</label><br>
+        <input type="number" name="potenzakw" required><br><br>
+        <label>Cavalli</label><br>
+        <input type="number" name="cavalli" required><br><br>
+        <label>Chilometraggio</label><br>
+        <input type="number" name="chilometraggio" required><br><br>
+        <label>Carrozzeria</label><br>
+        <select name="carrozzeria">
+            <option value="Berlina">Berlina</option>
+            <option value="Due Volumi">Due Volumi</option>
+            <option value="Station Wagon">Station Wagon</option>
+            <option value="SUV">SUV</option>
+            <option value="City Car">City Car</option>
+            <option value="Monovolume">Monovolume</option>
+            <option value="Cabrio">Cabrio</option>
+            <option value="Utilitaria">Utilitaria</option>
+        </select><br><br>
+        <label>Colore interni</label><br>
+        <input type="text" name="coloreinterni"><br><br>
+        <label>Targa</label><br>
+        <input type="text" name="targa" required><br><br>
+        <label>Prezzo (€)</label><br>
+        <input type="number" name="prezzo" required><br><br>
+        <label>Neopatentati</label><br>
+        <select name="neopatentati">
+            <option value="0">No</option>
+            <option value="1">Sì</option>
+        </select><br><br>
+        <label>Descrizione</label><br>
+        <textarea name="descrizione" rows="3"></textarea><br><br>
         <button type="submit">Aggiungi auto</button>
-
     </form>
 
 </div>

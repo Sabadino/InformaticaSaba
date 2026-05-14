@@ -1,5 +1,4 @@
 <?php
-// se sei già loggato non puoi registrarti
 if (isset($_SESSION['utente_id'])) {
     header('Location: catalogo.php');
     exit;
@@ -19,48 +18,34 @@ if (isset($_SESSION['utente_id'])) {
 
         <br>
 
-        <?php
-        // se c'è errore nell'url mostro il messaggio
-        if (isset($_GET['errore'])) {
-            echo "<div class='alert-errore'>Email o username già in uso</div>";
-        }
-        ?>
+        <?php if (isset($_GET['errore'])) { echo "<p style='color:red'>Email o username già in uso</p>"; } ?>
 
-        <!-- form che manda i dati a register_action.php -->
         <form action="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/userpages/register_action.php" method="POST">
-
             <div class="fg">
                 <label>Nome</label>
                 <input type="text" name="nome" required>
             </div>
-
             <div class="fg">
                 <label>Cognome</label>
                 <input type="text" name="cognome" required>
             </div>
-
             <div class="fg">
                 <label>Username</label>
                 <input type="text" name="username" required>
             </div>
-
             <div class="fg">
                 <label>Email</label>
                 <input type="email" name="email" required>
             </div>
-
             <div class="fg">
                 <label>Telefono</label>
                 <input type="text" name="telefono">
             </div>
-
             <div class="fg">
                 <label>Password</label>
                 <input type="password" name="password" required>
             </div>
-
             <button type="submit">Crea account</button>
-
         </form>
 
         <br>
