@@ -81,3 +81,16 @@ INSERT INTO macchina_immagini (ID_Macchina, URL, Ordine) VALUES
 (1, 'uploads/bmw.jpg', 0),
 (2, 'uploads/audi.jpg', 0),
 (3, 'uploads/golf.jpg', 0);
+
+
+-- view da usare in futuro al posto delle query SELECT nel catalogo
+CREATE VIEW auto_disponibili AS
+SELECT * FROM macchina WHERE Stato = 'Disponibile';
+
+-- stored procedure per vedere le prenotazioni mie da usare in futuro nella pagina delle prenotazioni
+DELIMITER //
+CREATE PROCEDURE GetPrenotazioniUtente(IN id_utente INT)
+BEGIN
+    SELECT * FROM prenotazione WHERE ID_Utente = id_utente;
+END //
+DELIMITER ;
