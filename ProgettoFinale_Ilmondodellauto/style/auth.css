@@ -57,7 +57,3 @@ body {
 }
 
 .auth-card a { color: #1C3829; }
-
-@media (max-width: 768px) {
-    .auth-card { padding: 24px; }
-}

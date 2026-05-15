@@ -22,7 +22,7 @@ if (!$auto) {
 <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/auth.css">
 
 <div class="auth-wrap">
-    <div class="auth-card">
+    <div class="card">
 
         <h2>Prenota test drive</h2>
         <p><?php echo $auto['Marca'] . ' ' . $auto['Modello'] . ' · ' . $auto['Anno']; ?></p>

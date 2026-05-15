@@ -118,8 +118,3 @@ body {
     color: gray;
 }
 
-@media (max-width: 768px) {
-    .det-grid { grid-template-columns: 1fr; }
-    .det-wrap { padding: 0 16px; }
-    .ctas { max-width: 100%; }
-}

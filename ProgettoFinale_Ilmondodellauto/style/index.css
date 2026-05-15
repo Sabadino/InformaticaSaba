@@ -157,10 +157,3 @@ body {
     opacity: 0.85;
 }
 
-@media (max-width: 768px) {
-    .hero h1 { font-size: 36px; }
-    .hero-overlay { left: 24px; bottom: 40px; }
-    .img-pausa { padding: 16px; }
-    .sezione-contatti { padding: 40px 16px; }
-    .loghi-grid { gap: 30px; }
-}
