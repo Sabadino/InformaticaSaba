@@ -7,9 +7,9 @@ $pdo = DBHandler::getPDO();
 $email = htmlspecialchars($_POST['email']);
 $password = $_POST['password'];
 
-// cerco utente per email
-$sql = "SELECT * FROM utente WHERE Email = '$email'";
+$sql = "SELECT * FROM utente WHERE Email = :email";
 $sth = $pdo->prepare($sql);
+$sth->bindParam(':email', $email, PDO::PARAM_STR);
 $sth->execute();
 $utente = $sth->fetch(PDO::FETCH_ASSOC);
 
