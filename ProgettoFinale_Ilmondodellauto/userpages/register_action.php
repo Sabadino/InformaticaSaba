@@ -15,11 +15,13 @@ $telefono = htmlspecialchars($_POST['telefono']);
 $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 // controllo se email o username esistono gia
-$sth = $pdo->prepare("SELECT ID FROM utente WHERE Email = '$email' OR Username = '$username'");
+$sql = "SELECT ID FROM utente WHERE Email = :email OR Username = :username";
+$sth = $pdo->prepare($sql);
+$sth->bindParam(':email', $email, PDO::PARAM_STR);
+$sth->bindParam(':username', $username, PDO::PARAM_STR);
 $sth->execute();
 $esiste = $sth->fetch(PDO::FETCH_ASSOC);
 
-if ($esiste) {
     header('Location: register.php?errore=1');
     exit();
 }
