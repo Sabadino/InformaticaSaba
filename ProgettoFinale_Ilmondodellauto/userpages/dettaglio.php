@@ -10,7 +10,7 @@ $id = $_GET['id'];
 // prendo auto
 $sql = "SELECT * FROM macchina WHERE ID = :id";
 $sth = $pdo->prepare($sql);
-$sth->bindParam(':id', $id, PDO::PARAM_INT); // bindParam per id numerico dall'url
+$sth->bindParam(':id', $id, PDO::PARAM_INT);
 $sth->execute();
 $auto = $sth->fetch(PDO::FETCH_ASSOC);
 
@@ -20,14 +20,16 @@ if (!$auto) {
 }
 
 // prendo foto
-$sql2 = "SELECT URL FROM macchina_immagini WHERE ID_Macchina = '$id' ORDER BY Ordine";
+$sql2 = "SELECT URL FROM macchina_immagini WHERE ID_Macchina = :id ORDER BY Ordine";
 $sth2 = $pdo->prepare($sql2);
+$sth2->bindParam(':id', $id, PDO::PARAM_INT);
 $sth2->execute();
 $foto = $sth2->fetchAll(PDO::FETCH_ASSOC);
 
 // prendo accessori
-$sql3 = "SELECT accessori.Nome FROM accessori JOIN macchina_accessori ON accessori.ID = macchina_accessori.ID_Accessorio WHERE macchina_accessori.ID_Macchina = '$id'";
+$sql3 = "SELECT accessori.Nome FROM accessori JOIN macchina_accessori ON accessori.ID = macchina_accessori.ID_Accessorio WHERE macchina_accessori.ID_Macchina = :id";
 $sth3 = $pdo->prepare($sql3);
+$sth3->bindParam(':id', $id, PDO::PARAM_INT);
 $sth3->execute();
 $accessori = $sth3->fetchAll(PDO::FETCH_ASSOC);
 ?>
