@@ -2,10 +2,14 @@
 $pdo = DBHandler::getPDO();
 
 // prendo prenotazioni dell'utente con i dati dell'auto
-$sql = "SELECT prenotazione.*, macchina.Marca, macchina.Modello, macchina.Anno FROM prenotazione JOIN macchina ON prenotazione.ID_Macchina = macchina.ID WHERE prenotazione.ID_Utente = '$_SESSION[utente_id]' ORDER BY prenotazione.ID DESC";
+$idUtente = $_SESSION['utente_id'];
+
+$sql = "SELECT prenotazione.*, macchina.Marca, macchina.Modello, macchina.Anno FROM prenotazione JOIN macchina ON prenotazione.ID_Macchina = macchina.ID WHERE prenotazione.ID_Utente = :id ORDER BY prenotazione.ID DESC";
 $sth = $pdo->prepare($sql);
+$sth->bindParam(':id', $idUtente, PDO::PARAM_INT);
 $sth->execute();
 $prenotazioni = $sth->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <link rel="stylesheet" href="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/style/prenotazioni.css">
