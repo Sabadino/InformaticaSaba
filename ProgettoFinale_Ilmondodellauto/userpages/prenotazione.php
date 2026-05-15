@@ -7,8 +7,9 @@ if (!isset($_GET['id'])) {
 $pdo = DBHandler::getPDO();
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM macchina WHERE ID = '$id'";
+$sql = "SELECT * FROM macchina WHERE ID = :id";
 $sth = $pdo->prepare($sql);
+$sth->bindParam(':id', $id, PDO::PARAM_INT);
 $sth->execute();
 $auto = $sth->fetch(PDO::FETCH_ASSOC);
 
