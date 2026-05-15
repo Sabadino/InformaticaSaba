@@ -22,6 +22,7 @@ $sth->bindParam(':username', $username, PDO::PARAM_STR);
 $sth->execute();
 $esiste = $sth->fetch(PDO::FETCH_ASSOC);
 
+if ($esiste) {
     header('Location: register.php?errore=1');
     exit();
 }

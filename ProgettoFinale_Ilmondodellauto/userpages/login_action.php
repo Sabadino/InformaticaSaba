@@ -14,7 +14,7 @@ $sth->execute();
 $utente = $sth->fetch(PDO::FETCH_ASSOC);
 
 if ($utente) {
-    // confronto password inserita con quella criptata nel db
+    // vonfronto pass
     if (password_verify($password, $utente['Password'])) {
         $_SESSION['utente_id'] = $utente['ID'];
         $_SESSION['utente_nome'] = $utente['Nome'];

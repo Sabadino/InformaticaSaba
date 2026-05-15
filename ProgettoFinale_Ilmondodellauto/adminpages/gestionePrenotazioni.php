@@ -1,7 +1,7 @@
 <?php
 $pdo = DBHandler::getPDO();
 
-// prendo tutte le prenotazioni con dati utente e auto
+// prende le prenotazioni
 $sql = "SELECT prenotazione.*, utente.Nome, utente.Cognome, macchina.Marca, macchina.Modello FROM prenotazione JOIN utente ON prenotazione.ID_Utente = utente.ID JOIN macchina ON prenotazione.ID_Macchina = macchina.ID ORDER BY prenotazione.ID DESC";
 $sth = $pdo->prepare($sql);
 $sth->execute();

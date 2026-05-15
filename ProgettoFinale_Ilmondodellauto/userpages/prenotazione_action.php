@@ -8,7 +8,7 @@ $idMacchina = htmlspecialchars($_POST['id_macchina']);
 $tipo = htmlspecialchars($_POST['tipo']);
 $idUtente = $_SESSION['utente_id'];
 
-// data attuale
+// per la data
 $data = date('Y-m-d H:i:s');
 
 // inserisco prenotazione

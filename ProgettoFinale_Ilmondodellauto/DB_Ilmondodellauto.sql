@@ -1,3 +1,4 @@
+-- Active: 1777359629503@@127.0.0.1@3306@concessionario
 CREATE DATABASE concessionario;
 
 USE concessionario;
@@ -83,14 +84,3 @@ INSERT INTO macchina_immagini (ID_Macchina, URL, Ordine) VALUES
 (3, 'uploads/golf.jpg', 0);
 
 
--- view da usare in futuro al posto delle query SELECT nel catalogo
-CREATE VIEW auto_disponibili AS
-SELECT * FROM macchina WHERE Stato = 'Disponibile';
-
--- stored procedure per vedere le prenotazioni mie da usare in futuro nella pagina delle prenotazioni
-DELIMITER //
-CREATE PROCEDURE GetPrenotazioniUtente(IN id_utente INT)
-BEGIN
-    SELECT * FROM prenotazione WHERE ID_Utente = id_utente;
-END //
-DELIMITER ;

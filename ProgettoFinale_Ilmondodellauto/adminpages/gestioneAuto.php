@@ -1,7 +1,7 @@
 <?php
 $pdo = DBHandler::getPDO();
 
-// prendo tutte le auto
+// prendo le auto
 $sql = "SELECT * FROM macchina ORDER BY ID DESC";
 $sth = $pdo->prepare($sql);
 $sth->execute();
@@ -40,7 +40,8 @@ $auto = $sth->fetchAll(PDO::FETCH_ASSOC);
                 <td><?php echo $a['Anno']; ?></td>
                 <td>€ <?php echo number_format($a['Prezzo'], 0, ',', '.'); ?></td>
                 <td><?php echo $a['Stato']; ?></td>
-                <td><a href="gestioneAuto_action.php?azione=elimina&id=<?php echo $a['ID']; ?>" onclick="return confirm('Sicuro?')" class="btn-elimina">Elimina</a></td>
+              <td><a href="gestioneAuto_action.php?azione=elimina&id=<?php echo $a['ID']; ?>" class="btn-elimina">Elimina</a></td>
+
             </tr>
         <?php } ?>
         </tbody>

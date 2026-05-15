@@ -47,11 +47,7 @@ $accessori = $sth3->fetchAll(PDO::FETCH_ASSOC);
 
             <?php if (count($foto) > 0) { ?>
                 <img src="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/<?php echo $foto[0]['URL']; ?>" class="foto-principale" alt="<?php echo $auto['Marca']; ?>">
-                <div class="thumbnails">
-                <?php foreach ($foto as $f) { ?>
-                    <img src="/InformaticaSaba/ProgettoFinale_Ilmondodellauto/<?php echo $f['URL']; ?>" class="thumbnail" alt="">
-                <?php } ?>
-                </div>
+               
             <?php } else { ?>
                 <div class="no-foto">Nessuna foto</div>
             <?php } ?>

@@ -32,7 +32,7 @@ if (isset($_POST['azione']) && $_POST['azione'] == 'aggiungi') {
 if (isset($_GET['azione']) && $_GET['azione'] == 'elimina') {
     $id = $_GET['id'];
 
-    // elimino auto - la cascade elimina anche foto e prenotazioni
+    // elimina
     $sql = "DELETE FROM macchina WHERE ID = '$id'";
     $pdo->exec($sql);
 
